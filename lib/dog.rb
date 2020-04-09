@@ -57,7 +57,7 @@ class Dog
             WHERE id = ?
             LIMIT 1
         SQL
-        row = DB[:conn].execute(sql, id).flatten
+        row = DB[:conn].execute(sql, id).first
         self.new_from_db(row)
     end
 
@@ -66,7 +66,7 @@ class Dog
             SELECT * FROM dogs
             WHERE name = ? AND breed = ?
         SQL
-        row = DB[:conn].execute(sql, name, breed).flatten
+        row = DB[:conn].execute(sql, name, breed).first
         if row.empty?
             self.create(name: name, breed: breed)
         else
@@ -79,7 +79,7 @@ class Dog
             SELECT * FROM dogs
             WHERE name = ?
         SQL
-        row = DB[:conn].execute(sql, name).flatten
+        row = DB[:conn].execute(sql, name).first
         self.new_from_db(row)
     end
 
